@@ -1,0 +1,20 @@
+[
+  {
+    "name": "unish",
+    "age": 20,
+    "course": "bsccsit",
+    "skills": [
+      "python"
+    ]
+  },
+  {
+    "name": "Riya",
+    "age": 20,
+    "course": "BSCCSIT",
+    "skills": [
+      "python",
+      "java",
+      "AI"
+    ]
+  }
+]

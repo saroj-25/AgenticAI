@@ -1,0 +1,273 @@
+RAG stands for Retrieval Augmented Generation. It improves the accuracy of large language models by connecting them with external knowledge sources. The model retrieves relevant data first. The model then generates an answer using that retrieved information.
+
+This method solves a common problem in language models. Models generate answers from training data only. Training data stays fixed after training. If the question requires new or private data, the model lacks access. RAG solves this problem by retrieving information from external documents during runtime.
+
+Core idea
+RAG combines two systems.
+
+Retrieval system
+Generation system
+
+The retrieval system searches a knowledge base. The generation system uses the retrieved content to produce an answer.
+
+How RAG works step by step
+
+Data collection
+You collect documents. Examples include PDF files, text files, website data, or company documents.
+
+Example sources
+Product manuals
+Research papers
+Company policies
+Restaurant menus
+Customer FAQs
+
+Document preprocessing
+Large documents get split into smaller pieces. These pieces are called chunks.
+
+Example
+A 50 page PDF gets split into 500 chunks.
+
+Reason
+Small chunks improve search accuracy.
+
+Text embedding
+Each chunk converts into a vector representation. A vector represents meaning in numbers.
+
+Example embedding model
+sentence transformers
+all MiniLM L6 v2
+
+Example vector
+[0.12, 0.84, 0.44, 0.91 ...]
+
+Chunks with similar meaning produce similar vectors.
+
+Vector database storage
+Vectors store in a vector database.
+
+Common vector databases
+Chroma
+FAISS
+Pinecone
+Weaviate
+
+Database stores two things
+vector embedding
+original text chunk
+
+User query
+A user asks a question.
+
+Example
+What is the refund policy for catering orders.
+
+Query embedding
+The system converts the question into a vector using the same embedding model.
+Similarity search
+The system searches the vector database.
+It finds chunks with similar meaning to the query.
+
+Example result
+Top 3 relevant document chunks.
+
+Context creation
+The retrieved chunks combine with the question.
+
+Example prompt
+
+Question
+What is the refund policy.
+
+Context
+Refund requests must be submitted within 48 hours.
+Catering deposits remain non refundable.
+
+Generation step
+The prompt sends to an LLM.
+
+Example models
+Llama 3
+Mistral
+GPT models
+Claude
+
+The LLM reads the retrieved context and generates the answer.
+
+Architecture of a RAG system
+
+Main components
+
+User
+Query interface
+
+Retriever
+Search system
+Vector database
+
+Generator
+Large language model
+
+Knowledge base
+Documents
+
+Flow
+
+User question
+Query embedding
+Vector search
+Retrieve relevant chunks
+Send context to LLM
+Generate answer
+
+Types of RAG
+
+Naive RAG
+Simple retrieval and generation.
+
+Steps
+retrieve documents
+send to LLM
+generate answer
+
+Advanced RAG
+Improves retrieval quality.
+
+Techniques include
+query rewriting
+multi step retrieval
+re ranking
+
+Agentic RAG
+Uses AI agents for reasoning and tool usage.
+
+Example
+Agent decides
+
+search database
+search internet
+summarize documents
+
+Advantages of RAG
+
+Up to date knowledge
+Model accesses new data without retraining.
+
+Private knowledge access
+Use company documents securely.
+
+Reduced hallucination
+Answers rely on retrieved data.
+
+Lower cost
+No need to train a new large model.
+
+Example use cases
+
+Customer support chatbot
+A chatbot reads company FAQs and manuals.
+
+Legal document assistant
+System answers questions about contracts.
+
+Medical knowledge system
+Doctors search research papers.
+
+Education system
+Students ask questions from lecture notes.
+
+Restaurant knowledge chatbot example
+
+Imagine a chatbot for Delhi to Kathmandu Restaurant.
+
+Knowledge base
+
+menu items
+catering policy
+opening hours
+reservation rules
+
+User question
+
+Do you serve vegetarian momo.
+
+Retriever finds document chunk
+
+Veg momos available.
+Steam veg momo
+Chilli veg momo
+Jhol veg momo
+
+LLM generates answer
+
+Yes. We serve several vegetarian momo options including steam, chilli, and jhol veg momo.
+
+Tools used to build RAG
+
+Programming language
+Python
+
+Libraries
+
+LangChain
+LlamaIndex
+Haystack
+
+Embedding models
+
+Sentence Transformers
+OpenAI embeddings
+BGE embeddings
+
+Vector databases
+
+Chroma
+FAISS
+Pinecone
+
+LLMs
+
+Llama 3 with Ollama
+Mistral
+GPT models
+
+Simple RAG pipeline
+
+Step 1
+Load documents
+
+Step 2
+Split documents
+
+Step 3
+Generate embeddings
+
+Step 4
+Store vectors in database
+
+Step 5
+Embed user query
+
+Step 6
+Retrieve top documents
+
+Step 7
+Send context to LLM
+
+Step 8
+Generate answer
+
+Why RAG is important for AI systems
+
+LLMs contain general knowledge only.
+Real applications require domain knowledge.
+
+Examples
+
+company data
+private documents
+latest research
+internal manuals
+
+RAG connects AI models with real data.
+This makes AI systems practical for business, research, and automation.
