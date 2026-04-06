@@ -21,7 +21,7 @@ Job Description:
 {job_description}
 
 Candidate CV Context: 
-{retrieved_csv_chunks}
+{retrieved_cv_chunks}
 
 Instruction: 
 
@@ -58,7 +58,7 @@ Instruction:
 
 STRICT OUTPUT FORMAT
 
-{
+{{
     "name": "", 
     "email":"", 
     "phone":"", 
@@ -66,15 +66,15 @@ STRICT OUTPUT FORMAT
     "skills":[], 
     "education":"", 
     "recent_roles":"", 
-    "scores":{
+    "scores":{{
     "required_skills_match_score":0, 
     "experience_match_score":0, 
     "education_match_score":0, 
-    "overall_score":0}, 
+    "overall_score":0}}, 
     "decision":"", 
     "reason":"", 
     "missing_skills":[], 
     "red_flag":[]
-}
+}}
 
 """.strip()

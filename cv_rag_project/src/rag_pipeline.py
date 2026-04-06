@@ -5,7 +5,7 @@ from langchain_community.vectorstores import Chroma
 from langchain_ollama import OllamaEmbeddings
 from src.prompt_template import SYSTEM_PROMPT, USER_PROMPT
 
-CHROMA_DIR = "data/chromadb"
+CHROMA_DIR = "data/chroma_db"
 
 def get_vector_store(embedding_model : str = "nomic-embed-text")-> Chroma:
     embeddings = OllamaEmbeddings(model = embedding_model)

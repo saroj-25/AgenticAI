@@ -13,8 +13,9 @@ def read_pdf(file_path:str) -> str:
 
     return "\n".join(texts).strip()
 
-def  read_docx(file_path:str) -> str: 
-    docs = Document()
+
+def read_docx(file_path: str) -> str:
+    docs = Document(file_path)  #  Load file here
     return "\n".join([p.text for p in docs.paragraphs]).strip()
 
 def read_cv(file_path : str) -> str: 
