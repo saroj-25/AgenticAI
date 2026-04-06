@@ -70,5 +70,83 @@ with col2:
 
             progress = st.progress(0)
             total = len(st.session_state.processed_files)
+        
+        for idx, cv_filename in enumerate(st.session_state.processed_files, start=1):
+            try: 
+                result = evaluate_candidate(
+                    vector_store=vector_store, 
+                    cv_filename=cv_filename, 
+                    job_description=job_description, 
+                    llm_model=llm_model, 
+                    top_k=top_k
+                )
+
+                result = apply_weighting(result)
+
+                results.append(result)
+
+            except Exception as e: 
+                results.append(
+                    {
+                        "cv_filename" :cv_filename, 
+                        "name": "", 
+                        "email":"", 
+                        "phone":"", 
+                        "total_experience_years":0, 
+                        "skills":[], 
+                        "education":"", 
+                        "recent_roles":"", 
+                        "scores":{
+                        "required_skills_match_score":0, 
+                        "experience_match_score":0, 
+                        "education_match_score":0, 
+                        "overall_score":0}, 
+                        "decision":"REJECTED", 
+                        "reason":"", 
+                        "missing_skills":[], 
+                        "red_flag":[f" Error : {str(e)}"]
+
+                    }
+                )
+
+                progress.progress(idx/total)
+
+                st.session_state.results = results
+
+                st.success("Candidate evaluation done successfully !!!")
+
+                if st.session_state.results: 
+                    df = flatten_result(st.session_state.results)
+
+                    filter_options = st.selectbox(
+                        "Filter option", 
+                        ["ALL", "SELECT", "HOLD", "REJECT"]
+
+                    )
+
+                    if filter_options!= "ALL": 
+                        df = df[df["Decision"] == filter_options]
+
+                        st.dataframe(df, use_container_width= True)
+
+                    
+                    csv_data = df.to_csv(index=True).encode("utf-8")
+
+                    st.download_button(label="Download Result CSV", data = csv_data, file_name="cv_evaluated_result.csv", mime="text/csv")
+
+                    
+                    st.markdown("## Detailed JSON Output ")
+
+                    for item in st.session_state.results : 
+                        with st.expander(f"{item.get('csv_file','unknown')} | {item.get('decision','')} | {item.get('scores', {}).get('overall_score',0)}"):
+                            st.json(item)
+
+                    else: 
+                        st.info("No result yet. Upload CVs, build vector database, and then only evaluate")
+
+
+                
+
+
 
             
