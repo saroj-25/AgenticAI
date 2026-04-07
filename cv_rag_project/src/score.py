@@ -11,7 +11,7 @@ def apply_weighting(result: dict) -> dict:
     if not isinstance(scores, dict):
         scores = {}
 
-    skill_score = safe_float(scores.get("required_skill_match_score", 0))
+    skill_score = safe_float(scores.get("required_skills_match_score", 0))
     edu_score = safe_float(scores.get("education_match_score", 0))
     experience_score = safe_float(scores.get("experience_match_score", 0))
 

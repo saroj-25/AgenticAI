@@ -44,7 +44,7 @@ def evaluate_candidate(
     )
 
     docs = retriever.invoke(job_description)
-    retrieved_cv_chunks = "\n\n".join(docs.page_content for doc in docs)
+    retrieved_cv_chunks = "\n\n".join(doc.page_content for doc in docs)
 
     promt = USER_PROMPT.format(
         job_description = job_description, 

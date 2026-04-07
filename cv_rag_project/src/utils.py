@@ -26,7 +26,7 @@ def flatten_result(results: list[dict]) -> pd.DataFrame:
             "Decision": item.get("decision", ""),
             "Reason": item.get("reason", ""),
             "Missing Skills": safe_join(item.get("missing_skills", [])),
-            "Red Flags": safe_join(item.get("red_flags", []))
+            "Red Flags": safe_join(item.get("red_flag", []))
         })
 
     df = pd.DataFrame(rows)

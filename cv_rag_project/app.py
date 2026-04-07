@@ -91,7 +91,7 @@ with col2:
                         "total_experience_years": 0,
                         "skills": [],
                         "education": "",
-                        "recent_role": "",
+                        "recent_roles": "",
                         "scores": {
                             "required_skills_match_score": 0,
                             "experience_match_score": 0,
@@ -100,7 +100,7 @@ with col2:
                         },
                         "decision": "REJECT",
                         "missing_skills": [],
-                        "red_flags": [f"Processing error: {str(e)}"],
+                        "red_flag": [f"Processing error: {str(e)}"],
                         "reason": "CV could not be processed."
                     })
 
